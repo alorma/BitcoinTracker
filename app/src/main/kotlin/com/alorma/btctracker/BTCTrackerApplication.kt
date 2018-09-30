@@ -11,14 +11,14 @@ class BTCTrackerApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        component = DaggerAppComponent.builder()
+        val component = DaggerAppComponent.builder()
                 .appModule(AppModule(this))
                 .build()
 
         setupComponent(component)
     }
 
-    private fun setupComponent(component: AppComponent) {
-
+    fun setupComponent(component: AppComponent) {
+        this.component = component
     }
 }
