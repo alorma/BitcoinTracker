@@ -6,7 +6,6 @@ import com.alorma.btctracker.data.charts.local.LocalChartDataSource
 import com.alorma.btctracker.data.charts.network.ChartAPI
 import com.alorma.btctracker.data.charts.network.NetworkChartDataSource
 import com.alorma.btctracker.data.charts.network.NetworkChartMapper
-import com.alorma.btctracker.domain.repository.ChartRepository
 import dagger.Module
 import dagger.Provides
 
@@ -22,10 +21,4 @@ class DataModule {
 
     @Provides
     fun localCache(): LocalChartDataSource = LocalChartDataSource
-
-    @Provides
-    fun provideChartRepository(
-            networkGet: GetChartData,
-            local: LocalChartDataSource
-    ): ChartRepository = ChartRepository(networkGet, local, local)
 }
