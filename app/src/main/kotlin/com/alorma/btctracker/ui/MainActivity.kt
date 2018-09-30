@@ -32,8 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         appComponent { inject(this@MainActivity) }
 
-        val time = ChartTimeStamp(3, ChartTimeStamp.Time.DAY)
-        val dispose = getChartData.execute(time)
+        val dispose = getChartData.execute()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
@@ -41,6 +40,7 @@ class MainActivity : AppCompatActivity() {
                 }, {
                     onError(it)
                 })
+
         disposable.add(dispose)
     }
 
@@ -48,6 +48,11 @@ class MainActivity : AppCompatActivity() {
         with(lineChart) {
             val values = it.values.map { Entry(it.x.toFloat(), it.y.toFloat()) }
             if (data == null || data.dataSetCount == 0) {
+                description.isEnabled = false
+                legend.isEnabled = false
+                xAxis.isEnabled = false
+                setNoDataText("")
+
                 setTouchEnabled(false)
                 setPinchZoom(false)
 
@@ -70,6 +75,8 @@ class MainActivity : AppCompatActivity() {
         setDrawIcons(false)
         color = Color.BLACK
         lineWidth = 1f
+        valueTextSize = 14f
+        setDrawCircles(false)
     }
 
     private fun onError(it: Throwable) {
