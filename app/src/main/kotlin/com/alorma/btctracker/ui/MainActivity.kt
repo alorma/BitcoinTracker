@@ -1,15 +1,21 @@
 package com.alorma.btctracker.ui
 
+import android.graphics.Color
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.alorma.btctracker.R
 import com.alorma.btctracker.domain.charts.ChartData
+import com.alorma.btctracker.domain.charts.ChartTimeStamp
 import com.alorma.btctracker.domain.charts.GetChartDataUC
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.main_activity.*
 import javax.inject.Inject
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,13 +24,16 @@ class MainActivity : AppCompatActivity() {
 
     private val disposable: CompositeDisposable = CompositeDisposable()
 
+    private lateinit var dataSet: LineDataSet
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 
         appComponent { inject(this@MainActivity) }
 
-        val dispose = getChartData.execute()
+        val time = ChartTimeStamp(3, ChartTimeStamp.Time.DAY)
+        val dispose = getChartData.execute(time)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
@@ -36,7 +45,31 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onDataReceived(it: ChartData) {
-        Toast.makeText(this, "${it.name} - ${it.values.size}", Toast.LENGTH_SHORT).show()
+        with(lineChart) {
+            val values = it.values.map { Entry(it.x.toFloat(), it.y.toFloat()) }
+            if (data == null || data.dataSetCount == 0) {
+                setTouchEnabled(false)
+                setPinchZoom(false)
+
+                dataSet = LineDataSet(values, "DataSet 1").apply {
+                    configLine()
+                }
+
+                data = LineData(listOf(dataSet))
+            } else {
+                dataSet.values = values
+                dataSet.notifyDataSetChanged()
+                notifyDataSetChanged()
+            }
+            animateX(1000)
+            animateY(1000)
+        }
+    }
+
+    private fun LineDataSet.configLine() {
+        setDrawIcons(false)
+        color = Color.BLACK
+        lineWidth = 1f
     }
 
     private fun onError(it: Throwable) {

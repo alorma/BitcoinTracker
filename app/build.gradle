@@ -49,6 +49,8 @@ dependencies {
     implementation 'com.google.dagger:dagger:2.16'
     kapt 'com.google.dagger:dagger-compiler:2.16'
 
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+
     testImplementation 'junit:junit:4.12'
 
     testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0-RC2'
