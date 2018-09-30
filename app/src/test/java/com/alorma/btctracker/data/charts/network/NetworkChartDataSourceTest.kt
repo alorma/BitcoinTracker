@@ -2,10 +2,10 @@ package com.alorma.btctracker.data.charts.network
 
 import com.alorma.btctracker.data.charts.CharTimeStampMapper
 import com.alorma.btctracker.domain.charts.ChartTimeStamp
-import com.nhaarman.mockitokotlin2.eq
-import com.nhaarman.mockitokotlin2.given
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockito_kotlin.eq
+import com.nhaarman.mockito_kotlin.given
+import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockito_kotlin.verify
 import io.reactivex.Maybe
 import org.junit.Before
 import org.junit.Test

@@ -1,4 +1,4 @@
-package com.alorma.btctracker.ui
+package com.alorma.btctracker.ui.chart
 
 import android.graphics.Color
 import android.os.Bundle
@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.alorma.btctracker.R
 import com.alorma.btctracker.domain.charts.ChartData
 import com.alorma.btctracker.domain.charts.GetChartDataUC
+import com.alorma.btctracker.ui.appComponent
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -35,7 +36,9 @@ class MainActivity : AppCompatActivity() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    onDataReceived(it)
+                    runOnUiThread {
+                        onDataReceived(it)
+                    }
                 }, {
                     onError(it)
                 })

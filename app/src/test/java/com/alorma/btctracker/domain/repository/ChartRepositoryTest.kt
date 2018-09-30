@@ -2,7 +2,7 @@ package com.alorma.btctracker.domain.repository
 
 import com.alorma.btctracker.data.charts.GetChartData
 import com.alorma.btctracker.domain.charts.ChartData
-import com.nhaarman.mockitokotlin2.*
+import com.nhaarman.mockito_kotlin.*
 import io.reactivex.Maybe
 import org.junit.Before
 import org.junit.Test
