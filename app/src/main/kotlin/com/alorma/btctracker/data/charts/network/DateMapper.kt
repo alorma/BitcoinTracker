@@ -1,8 +1,9 @@
 package com.alorma.btctracker.data.charts.network
 
 import java.util.*
+import javax.inject.Inject
 
-class DateMapper {
+class DateMapper @Inject constructor() {
 
     fun map(it: Long): Date = Date(it * TIME_API_MULTIPLIER)
 

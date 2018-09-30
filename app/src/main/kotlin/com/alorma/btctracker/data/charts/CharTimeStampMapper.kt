@@ -1,8 +1,9 @@
 package com.alorma.btctracker.data.charts
 
 import com.alorma.btctracker.domain.charts.ChartTimeStamp
+import javax.inject.Inject
 
-class CharTimeStampMapper {
+class CharTimeStampMapper @Inject constructor() {
 
     fun map(timeStamp: ChartTimeStamp): String {
         return when {

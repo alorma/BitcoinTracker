@@ -3,8 +3,9 @@ package com.alorma.btctracker.data.charts.network
 import com.alorma.btctracker.domain.charts.ChartData
 import com.alorma.btctracker.domain.charts.ChartPoint
 import com.alorma.btctracker.domain.charts.Currency
+import javax.inject.Inject
 
-class NetworkChartMapper(
+class NetworkChartMapper @Inject constructor(
         private val currencyMapper: CurrencyMapper,
         private val dateMapper: DateMapper
 ) {
