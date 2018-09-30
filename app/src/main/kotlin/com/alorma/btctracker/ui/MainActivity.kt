@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.alorma.btctracker.R
 import com.alorma.btctracker.domain.charts.ChartData
-import com.alorma.btctracker.domain.charts.ChartTimeStamp
 import com.alorma.btctracker.domain.charts.GetChartDataUC
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -51,6 +50,7 @@ class MainActivity : AppCompatActivity() {
                 description.isEnabled = false
                 legend.isEnabled = false
                 xAxis.isEnabled = false
+                axisRight.isEnabled = false
                 setNoDataText("")
 
                 setTouchEnabled(false)
