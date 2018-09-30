@@ -5,7 +5,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.alorma.btctracker.R
 import com.alorma.btctracker.domain.charts.ChartData
-import com.alorma.btctracker.domain.charts.ChartTimeStamp
 import com.alorma.btctracker.domain.charts.GetChartDataUC
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -25,9 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         appComponent { inject(this@MainActivity) }
 
-        val time = ChartTimeStamp(3, ChartTimeStamp.Time.DAY)
-
-        val dispose = getChartData.execute(time)
+        val dispose = getChartData.execute()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
@@ -39,11 +36,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onDataReceived(it: ChartData) {
-        Toast.makeText(this, "$it.name - ${it.values.size}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "${it.name} - ${it.values.size}", Toast.LENGTH_SHORT).show()
     }
 
     private fun onError(it: Throwable) {
-        Toast.makeText(this, "$it", Toast.LENGTH_SHORT).show()
+        it.printStackTrace()
     }
 
     override fun onStop() {

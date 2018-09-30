@@ -9,7 +9,7 @@ import io.reactivex.Maybe
 object LocalChartDataSource : GetChartData, SaveChartData {
     private var chart: ChartData? = null
 
-    override fun getChartData(timeStamp: ChartTimeStamp): Maybe<ChartData> =
+    override fun getChartData(timeStamp: ChartTimeStamp?): Maybe<ChartData> =
             chart?.let { Maybe.just(it) } ?: Maybe.empty()
 
     override fun save(chartData: ChartData) {

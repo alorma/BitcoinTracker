@@ -13,9 +13,12 @@ class NetworkChartDataSource @Inject constructor(
         private val dataMapper: NetworkChartMapper
 ) : GetChartData {
 
-    override fun getChartData(timeStamp: ChartTimeStamp): Maybe<ChartData> =
+    override fun getChartData(timeStamp: ChartTimeStamp?): Maybe<ChartData> =
             Maybe.defer {
-                val time = timeStampMapper.map(timeStamp)
-                api.getChart(time).toMaybe()
+                val single = timeStamp?.let {
+                    val time = timeStampMapper.map(timeStamp)
+                    api.getChart(time)
+                } ?: api.getChart()
+                single
             }.map { dataMapper.map(it) }
 }

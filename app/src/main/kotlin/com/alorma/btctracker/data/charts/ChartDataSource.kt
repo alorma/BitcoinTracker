@@ -5,7 +5,7 @@ import com.alorma.btctracker.domain.charts.ChartTimeStamp
 import io.reactivex.Maybe
 
 interface GetChartData {
-    fun getChartData(timeStamp: ChartTimeStamp): Maybe<ChartData>
+    fun getChartData(timeStamp: ChartTimeStamp?): Maybe<ChartData>
 }
 
 interface SaveChartData {

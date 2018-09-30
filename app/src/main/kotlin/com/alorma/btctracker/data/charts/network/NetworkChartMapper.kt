@@ -12,7 +12,11 @@ class NetworkChartMapper @Inject constructor(
     fun map(it: ChartDataDTO): ChartData = ChartData(
             it.name,
             it.description,
-            currencyMapper.map(it.unit).let { currency -> it.values.map { mapPoint(it, currency) } }
+            currencyMapper.map(it.unit).let { currency ->
+                it.values.map {
+                    mapPoint(it, currency)
+                }
+            }
     )
 
     private fun mapPoint(it: ChartPointDTO, currency: Currency): ChartPoint = ChartPoint(

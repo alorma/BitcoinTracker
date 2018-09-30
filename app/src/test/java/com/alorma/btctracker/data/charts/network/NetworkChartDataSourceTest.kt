@@ -6,7 +6,7 @@ import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.given
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
-import io.reactivex.Single
+import io.reactivex.Maybe
 import org.junit.Before
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyString
@@ -42,7 +42,7 @@ class NetworkChartDataSourceTest {
     @Test
     fun `on api returns valid data returns mapped`() {
         val elements = 3
-        given(api.getChart(anyString())).willReturn(Single.just(createData(elements)))
+        given(api.getChart(anyString())).willReturn(Maybe.just(createData(elements)))
 
         val time = ChartTimeStamp(3, ChartTimeStamp.Time.DAY)
 

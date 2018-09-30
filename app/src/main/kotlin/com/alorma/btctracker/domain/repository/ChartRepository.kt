@@ -13,7 +13,7 @@ class ChartRepository(
         private val saveChartData: SaveChartData
 ) {
 
-    fun getChartData(timeStamp: ChartTimeStamp): Single<ChartData> =
+    fun getChartData(timeStamp: ChartTimeStamp?): Single<ChartData> =
             localGetChartData.getChartData(timeStamp)
                     .switchIfEmpty(Maybe.defer {
                         networkGetChartData.getChartData(timeStamp).doOnSuccess {

@@ -8,5 +8,6 @@ class GetChartDataUC @Inject constructor(
         private val chartRepository: ChartRepository
 ) {
 
-    fun execute(timeStamp: ChartTimeStamp): Single<ChartData> = chartRepository.getChartData(timeStamp)
+    fun execute(timeStamp: ChartTimeStamp? = null): Single<ChartData> =
+            chartRepository.getChartData(timeStamp)
 }

@@ -9,7 +9,7 @@ data class ChartDataDTO(
         val description: String,
         @SerializedName("period")
         val period: String,
-        @SerializedName("unir")
+        @SerializedName("unit")
         val unit: String,
         @SerializedName("values")
         val values: List<ChartPointDTO>
